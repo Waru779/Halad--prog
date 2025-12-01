@@ -25,10 +25,10 @@ class LinearRegressionApp:
         root.grid_columnconfigure(0, weight=1)
 
         #GOMBOK
-        ttk.Button(main, text="📂 Adatok betöltése (CSV)", command=self.load_csv).pack(fill="x", pady=5)
-        ttk.Button(main, text="📄 Új adatok generálása", command=self.generate_new_data).pack(fill="x", pady=5)
-        ttk.Button(main, text="🤖 Modell tanítása", command=self.train_model).pack(fill="x", pady=5)
-        ttk.Button(main, text="📈 Grafikon megjelenítése", command=self.show_plot).pack(fill="x", pady=5)
+        ttk.Button(main, text="Adatok betöltése (CSV)", command=self.load_csv).pack(fill="x", pady=5)
+        ttk.Button(main, text="Új adatok generálása", command=self.generate_new_data).pack(fill="x", pady=5)
+        ttk.Button(main, text="Modell tanítása", command=self.train_model).pack(fill="x", pady=5)
+        ttk.Button(main, text="Grafikon megjelenítése", command=self.show_plot).pack(fill="x", pady=5)
 
         #Eredmény
         self.result_label = ttk.Label(main, text="Nincs adat", justify="center", font=("Arial", 11),anchor="center")
@@ -49,7 +49,7 @@ class LinearRegressionApp:
                 if self.data.shape[1] < 2:
                     raise ValueError("Legalább 2 oszlop kell (X és Y).")
 
-                self.status.config(text="📁 CSV betöltve!", bootstyle="info")
+                self.status.config(text="CSV betöltve!", bootstyle="info")
                 self.result_label.config(text="CSV betöltve.", bootstyle="light")
 
             except Exception as e:
@@ -71,7 +71,7 @@ class LinearRegressionApp:
 
             self.data = df
 
-            self.status.config(text="📄 Új adatok generálva (adatok.csv)", bootstyle="info")
+            self.status.config(text="Új adatok generálva (adatok.csv)", bootstyle="info")
             self.result_label.config(text="Új adatok generálva. Tanítsd meg a modellt!", bootstyle="light")
 
         except Exception as e:
@@ -80,7 +80,7 @@ class LinearRegressionApp:
     #Modell tanítása
     def train_model(self):
         if self.data is None:
-            self.status.config(text="❗ Nincs adat!", bootstyle="danger")
+            self.status.config(text="Nincs adat!", bootstyle="danger")
             return
 
         try:
@@ -99,7 +99,7 @@ class LinearRegressionApp:
             intercept = self.model.intercept_
 
             text = (
-                f"✔ Modell betanítva!\n\n"
+                f"Modell betanítva!\n\n"
                 f"Meredekség: {slope:.4f}\n"
                 f"Metszéspont: {intercept:.4f}\n\n"
                 f"MSE: {mse:.4f}\n"
@@ -115,7 +115,7 @@ class LinearRegressionApp:
                 color = "danger"
 
             self.result_label.config(text=text, bootstyle=color)
-            self.status.config(text="🤖 Modell sikeresen betanítva!", bootstyle="success")
+            self.status.config(text="Modell sikeresen betanítva!", bootstyle="success")
 
         except Exception as e:
             self.status.config(text=f"Hiba: {e}", bootstyle="danger")
@@ -123,7 +123,7 @@ class LinearRegressionApp:
     # Grafikon
     def show_plot(self):
         if self.model is None:
-            self.status.config(text="❗ Először tanítsd be a modellt!", bootstyle="danger")
+            self.status.config(text="Először tanítsd be a modellt!", bootstyle="danger")
             return
 
         X = self.data.iloc[:, 0].values
@@ -144,7 +144,7 @@ class LinearRegressionApp:
         plt.grid(True)
         plt.show()
 
-        self.status.config(text="📈 Grafikon megjelenítve.", bootstyle="info")
+        self.status.config(text="Grafikon megjelenítve.", bootstyle="info")
 
 
 #Program lefutása
